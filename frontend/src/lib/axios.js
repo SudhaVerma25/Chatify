@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL
-export const axiosInstance = axios.create({
-  baseURL: BASE_URL + "/api",
-   withCredentials: true,
+cexport const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL + "/api",
+  withCredentials: true,
 });
+
