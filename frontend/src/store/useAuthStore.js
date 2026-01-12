@@ -44,6 +44,7 @@ export const useAuthStore = create((set, get) => ({
     error?.response?.data?.message ||
     "Signup failed. Please try again.";
   toast.error(msg);
+    }
   },
 
   login: async (data) => {
