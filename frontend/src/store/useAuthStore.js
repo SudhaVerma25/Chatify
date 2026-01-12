@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE ==="development" ? "http://localhost:3000" : "import.meta.env.VITE_BACKEND_URL";
+const BASE_URL = import.meta.env.MODE ==="development" ? "http://localhost:3000" : import.meta.env.VITE_BACKEND_URL;
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -34,11 +34,16 @@ export const useAuthStore = create((set, get) => ({
 
       toast.success("Account created successfully!");
       get().connectSocket();
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      set({ isSigningUp: false });
-    }
+    // } catch (error) {
+    //   toast.error(error.response.data.message);
+    // } finally {
+    //   set({ isSigningUp: false });
+    // }
+      } catch (error) {
+  const msg =
+    error?.response?.data?.message ||
+    "Signup failed. Please try again.";
+  toast.error(msg);
   },
 
   login: async (data) => {
@@ -51,7 +56,11 @@ export const useAuthStore = create((set, get) => ({
 
       get().connectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
+  const msg =
+    error?.response?.data?.message ||
+    "Login failed. Please try again.";
+  toast.error(msg);
     } finally {
       set({ isLoggingIn: false });
     }
@@ -76,7 +85,12 @@ export const useAuthStore = create((set, get) => ({
       toast.success("Profile updated successfully");
     } catch (error) {
       console.log("Error in update profile:", error);
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
+      } catch (error) {
+  const msg =
+    error?.response?.data?.message ||
+    "Profile update failed.";
+  toast.error(msg);
     }
   },
 
