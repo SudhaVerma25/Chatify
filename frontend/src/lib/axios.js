@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 export const axiosInstance = axios.create({
-  baseURL: BASE_URL + "/api",
+  // baseURL: import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/api",
+  baseURL: https://chatify-backend-ov8j.onrender.com /api",
   withCredentials: true,
 });
-
