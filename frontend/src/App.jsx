@@ -13,8 +13,8 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  // }, [checkAuth]);
-    }, []);
+   }, [checkAuth]);
+    
 
   if (isCheckingAuth) return <PageLoader />;
 
