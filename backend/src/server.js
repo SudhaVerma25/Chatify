@@ -17,7 +17,8 @@ app.use(express.json({ limit: "5mb" })); // req.body
 // app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use(
   cors({
-    origin: "https://chatify-frontend-3byb.onrender.com",
+    // origin: "https://chatify-frontend-3byb.onrender.com",
+    origin:true,
     credentials: true,
   })
 );
@@ -28,6 +29,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 //make ready for deployment
+app.get("/socket.io/*", (req, res) => {
+  res.status(204).end();
+});
+
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
