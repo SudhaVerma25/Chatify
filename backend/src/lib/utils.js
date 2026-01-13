@@ -7,20 +7,25 @@ export const generateToken = (userId, res) => {
     throw new Error("JWT_SECRET is not configured");
   }
 
-  const token = jwt.sign({ userId }, JWT_SECRET, {
+//   const token = jwt.sign({ userId }, JWT_SECRET, {
+//     expiresIn: "7d",
+//   });
+
+//   res.cookie("jwt", token, {
+//     maxAge: 7 * 24 * 60 * 60 * 1000, // MS
+//     httpOnly: true, // prevent XSS attacks: cross-site scripting
+//     sameSite: "strict", // CSRF attacks
+//     secure: process.env.NODE_ENV === "development" ? false :true,
+//     // secure: true,
+//   });
+
+export const generateToken = (userId) => {
+  return jwt.sign({ userId }, ENV.JWT_SECRET, {
     expiresIn: "7d",
   });
-
-  res.cookie("jwt", token, {
-    maxAge: 7 * 24 * 60 * 60 * 1000, // MS
-    httpOnly: true, // prevent XSS attacks: cross-site scripting
-    sameSite: "strict", // CSRF attacks
-    secure: process.env.NODE_ENV === "development" ? false :true,
-    // secure: true,
-  });
-
-  return token;
 };
+   return token;
+ };
 
 // http://localhost
 // https://dsmakmk.com
